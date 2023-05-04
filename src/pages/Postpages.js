@@ -108,7 +108,7 @@ function Postpages() {
             </Segment>
 
             <div>
-              <Button basic as={Link} to="modify">
+              <Button basic as={Link} to="modify" >
                 更改文章
               </Button>
               <Button color="red" onClick={() => Deletealert(post.id)}>

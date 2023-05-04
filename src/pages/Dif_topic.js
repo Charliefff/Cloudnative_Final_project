@@ -25,7 +25,6 @@ function Dif_topic() {
       });
   }, [currentTopic]);
   // eslint-disable-next-line
-  
   function updateViewUser(postId) {
     firebase
       .firestore()

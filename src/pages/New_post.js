@@ -1,4 +1,4 @@
-import { Container, Header, Form, Button } from "semantic-ui-react";
+import { Container, Header, Form, Button} from "semantic-ui-react";
 import React from "react";
 import { useState } from "react";
 import "firebase/compat/firestore";
@@ -87,7 +87,6 @@ function New_Post() {
         <Header as="h1">New Post</Header>
       </div>
       <Form onSubmit={onSubmit}>
-        {/* <Image src={preview} size="small" floated="left" /> */}
         <Form.Input
           type="file"
           width={6}
