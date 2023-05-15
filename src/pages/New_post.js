@@ -1,4 +1,4 @@
-import { Container, Header, Form, Button} from "semantic-ui-react";
+import { Container, Header, Form, Button } from "semantic-ui-react";
 import React from "react";
 import { useState } from "react";
 import "firebase/compat/firestore";
@@ -36,9 +36,9 @@ function New_Post() {
     };
   });
   // eslint-disable-next-line
-  const preview = file
-    ? URL.createObjectURL(file)
-    : "https://react.semantic-ui.com/images/wireframe/image.png";
+  // const preview = file
+  //   ? URL.createObjectURL(file)
+  //   : "https://react.semantic-ui.com/images/wireframe/image.png";
 
   function onSubmit() {
     setIsloading(true);

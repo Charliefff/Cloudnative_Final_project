@@ -1,4 +1,4 @@
-import { Container, Grid, Tab } from "semantic-ui-react";
+import { Container, Grid, Item, MenuItem, Tab } from "semantic-ui-react";
 import Topics from "../compoments/Topic";
 import firebase from "../utils/firebase";
 import React from "react";
@@ -8,47 +8,46 @@ import Version from "./Version";
 
 function Postpages() {
   const { postId } = useParams();
-  const [post, setPost] = React.useState({
+
+  const [originalPost, setOriginalPost] = React.useState({
     author: {},
   }); //[post, setPost] = React.useState({}); // 這裡的post是一個物件，所以要用{}，不是[]
+
   React.useEffect(() => {
     firebase
       .firestore()
       .collection("posts")
       .doc(postId)
+
       .get()
       .then((docSnapshot) => {
         const data = docSnapshot.data();
-        setPost({
-          title: data.title,
-          content: data.content,
-          imageUrl: data.imageUrl,
-          author: data.author,
-          viewCount: data.viewCount || 0,
-          updateCount: data.updateCount || 0,
-          createAt: data.createAt || new Date(), // 使用默認值
+        setOriginalPost({
+          cretedAt: data.cretedAt || new Date(), // 使用默認值
         });
       });
   }, [postId]);
+
+  const [posts, setPosts] = React.useState([]);
+  React.useEffect(() => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(postId)
+      .collection("versions")
+      .get()
+      .then((collectionSnapshot) => {
+        const data = collectionSnapshot.docs.map((docSnapshot) => {
+          const id = docSnapshot.id;
+          return { ...docSnapshot.data(), id };
+        });
+        setPosts(data);
+      });
+  }, []);
+
   const panes = [
     {
-      menuItem: "Tab 1",
-      render: () => (
-        <Tab.Pane>
-          <Version />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: "Tab 2",
-      render: () => (
-        <Tab.Pane>
-          <Version />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: "Tab 3",
+      menuItem: "INITIAL VERSION",
       render: () => (
         <Tab.Pane>
           <Version />
@@ -66,6 +65,17 @@ function Postpages() {
           </Grid.Column>
           <Grid.Column width={13}>
             <Tab panes={panes} />
+            <Tab.Pane>
+              <Item.Group>
+                {posts.map((post) => {
+                  return (
+                    <Item key={post.id}>
+                      <Tab panes={panes} />
+                    </Item>
+                  );
+                })}
+              </Item.Group>
+            </Tab.Pane>
           </Grid.Column>
         </Grid.Row>
         {/* <Headers></Headers> */}

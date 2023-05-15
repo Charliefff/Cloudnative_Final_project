@@ -1,16 +1,20 @@
-import { Button, Container, Form, Header} from "semantic-ui-react";
+import { Button, Container, Form, Header } from "semantic-ui-react";
 import { useState } from "react";
 
 import firebase from "../utils/firebase";
 import React from "react";
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "firebase/firestore";
 
 function Modify() {
   const { postId } = useParams();
+  const navigate = useNavigate();
   // eslint-disable-next-line
   const [content, setContent] = useState("");
-  // const [title, setTitle] = useState("");
+  const [isloading, setIsloading] = useState(false);
+  const [file] = useState(null);
+  const [title] = useState("");
+  const [topicName] = useState("");
 
   const [post, setPost] = React.useState({
     author: {},
@@ -27,19 +31,71 @@ function Modify() {
       });
   }, [postId]);
 
+  React.useEffect(() => {
+    setContent(post.content);
+  }, [post.content]);
+
+  function onSubmit() {
+    setIsloading(true);
+
+    const documentRef = firebase
+      .firestore()
+      .collection("posts")
+      .doc(postId)
+      .collection("versions")
+      .doc();
+
+    const fileRef = firebase
+      .storage()
+      .ref("post/" + postId + "versions/" + documentRef.id);
+
+    let metadata = {};
+    if (file !== null) {
+      metadata = {
+        contentType: file.type,
+      };
+    }
+
+    fileRef.put(file, metadata).then(() => {
+      fileRef.getDownloadURL().then((imageUrl) => {
+        documentRef
+          .set({
+            topic: topicName,
+            content,
+            title,
+            cretedAt: firebase.firestore.Timestamp.now(),
+            author: {
+              display: firebase.auth().currentUser.displayName || "Unknown",
+              photoURL:
+                firebase.auth().currentUser.photoURL ||
+                "https://react.semantic-ui.com/images/avatar/large/molly.png",
+              uid: firebase.auth().currentUser.uid,
+              email: firebase.auth().currentUser.email,
+            },
+            imageUrl,
+          })
+          .then(() => {
+            setIsloading(false);
+            navigate("/");
+          });
+      });
+    });
+  }
+
   return (
     <Container>
       <Header as="h1">更改文章</Header>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Input value={post.title} readOnly />
         <Form.TextArea
           // placeholder={post.content}
-          value={post.content}
+
+          value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={30}
         />
         {/* <Image src={post.imageUrl} size="small" floated="left" /> */}
-        <Button>送出更改</Button>
+        <Button loading={isloading}>送出更改</Button>
       </Form>
     </Container>
   );

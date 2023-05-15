@@ -25,22 +25,23 @@ function Dif_topic() {
       });
   }, [currentTopic]);
   // eslint-disable-next-line
-  function updateViewUser(postId) {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .update({
-        viewUser: firebase.firestore.FieldValue.arrayUnion(
-          firebase.auth().currentUser.uid
-        ),
-      });
-  }
+  // function updateViewUser(postId) {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .doc(postId)
+  //     .update({
+  //       viewUser: firebase.firestore.FieldValue.arrayUnion(
+  //         firebase.auth().currentUser.uid
+  //       ),
+  //     });
+  // }
   function incrementViewCount(postId) {
     firebase
       .firestore()
       .collection("posts")
       .doc(postId)
+
       .update({
         viewCount: firebase.firestore.FieldValue.increment(1),
       });

@@ -60,6 +60,7 @@ function Post() {
                         {post.topic} • {post.author.name || "匿名"} •{" "}
                         {post.cretedAt
                           ? post.cretedAt.toDate().toLocaleString([], {
+                              year: "numeric",
                               month: "short",
                               day: "numeric",
                               hour: "2-digit",

@@ -25,18 +25,11 @@ function Version() {
           author: data.author,
           viewCount: data.viewCount || 0,
           updateCount: data.updateCount || 0,
-          createAt: data.createAt || new Date(), // 使用默認值
+          cretedAt: data.cretedAt || new Date(), // 使用默認值
         });
       });
   }, [postId]);
-  function Deletealert(id) {
-    let isExecuted = alert("Are you sure to execute this action?");
-    if (isExecuted) {
-      onDelete(id);
-    } else {
-      alert("You have cancelled this action.");
-    }
-  }
+
   function onDelete(id) {
     firebase
       .firestore()
@@ -62,8 +55,17 @@ function Version() {
           style={{ marginRight: "1rem" }}
         />
         <div>
-          <h5>上版本修改人員 :</h5>
-          {post.author.displayName || "匿名"}
+          <h5>版本修改人員 / 時間 :</h5>
+          {post.author.displayName || "匿名 / "}{"    "}
+          {post.cretedAt
+                          ? post.cretedAt.toDate().toLocaleString([], {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : "2021-10-10 08:00 AM"}
         </div>
       </div>
       <Segment basic vertical>
@@ -75,9 +77,6 @@ function Version() {
       <Header as="h1">
         {/* <h1>Title</h1> */}
         {post.title}
-        <Header.Subheader>
-          {post.created_At ? post.createAt.toDate().toLocaleDateString() : ""}
-        </Header.Subheader>
       </Header>
       <Image src={post.imageUrl} size="large" />
       <Segment basic vertical>
@@ -88,7 +87,7 @@ function Version() {
         <Button basic as={Link} to="modify">
           更改文章
         </Button>
-        <Button color="red" onClick={() => Deletealert(post.id)}>
+        <Button color="red" onClick={() => onDelete(post.id)}>
           刪除文章
         </Button>
       </div>
