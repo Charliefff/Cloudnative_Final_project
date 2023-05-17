@@ -1,33 +1,55 @@
 import { Image, Header, Segment, Button } from "semantic-ui-react";
-//   import Topics from "../compoments/Topic";
 import firebase from "../utils/firebase";
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import "firebase/firestore";
+import { version } from "react/cjs/react.production.min";
 
-function Version() {
+function Version({ versionId }) {
   const { postId } = useParams();
   const [post, setPost] = React.useState({
     author: {},
-  }); //[post, setPost] = React.useState({}); // 這裡的post是一個物件，所以要用{}，不是[]
+  });
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .get()
-      .then((docSnapshot) => {
-        const data = docSnapshot.data();
-        setPost({
-          title: data.title,
-          content: data.content,
-          imageUrl: data.imageUrl,
-          author: data.author,
-          viewCount: data.viewCount || 0,
-          updateCount: data.updateCount || 0,
-          cretedAt: data.cretedAt || new Date(), // 使用默認值
+    if (versionId) {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("versions")
+        .doc(versionId)
+        .get()
+        .then((docSnapshot) => {
+          const data = docSnapshot.data();
+          setPost({
+            title: data.title,
+            content: data.content,
+            imageUrl: data.imageUrl,
+            author: data.author,
+            viewCount: data.viewCount || 0,
+            updateCount: data.updateCount || 0,
+            cretedAt: data.cretedAt || new Date(), // 使用默認值
+          });
         });
-      });
+    } else {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .get()
+        .then((docSnapshot) => {
+          const data = docSnapshot.data();
+          setPost({
+            title: data.title,
+            content: data.content,
+            imageUrl: data.imageUrl,
+            author: data.author,
+            viewCount: data.viewCount || 0,
+            updateCount: data.updateCount || 0,
+            cretedAt: data.cretedAt || new Date(), // 使用默認值
+          });
+        });
+    }
   }, [postId]);
 
   function onDelete(id) {
@@ -56,16 +78,17 @@ function Version() {
         />
         <div>
           <h5>版本修改人員 / 時間 :</h5>
-          {post.author.displayName || "匿名 / "}{"    "}
+          {post.author.displayName || "匿名 / "}
+          {"    "}
           {post.cretedAt
-                          ? post.cretedAt.toDate().toLocaleString([], {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                          : "2021-10-10 08:00 AM"}
+            ? post.cretedAt.toDate().toLocaleString([], {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })
+            : "2021-10-10 08:00 AM"}
         </div>
       </div>
       <Segment basic vertical>
@@ -84,7 +107,11 @@ function Version() {
       </Segment>
 
       <div>
-        <Button basic as={Link} to="modify">
+        <Button
+          basic
+          as={Link}
+          to={versionId ? `modify/${versionId}` : `modify`}
+        >
           更改文章
         </Button>
         <Button color="red" onClick={() => onDelete(post.id)}>

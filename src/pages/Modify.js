@@ -7,33 +7,55 @@ import { useParams, useNavigate } from "react-router-dom";
 import "firebase/firestore";
 
 function Modify() {
-  const { postId } = useParams();
+  const { postId, versionId } = useParams();
   const navigate = useNavigate();
   // eslint-disable-next-line
   const [content, setContent] = useState("");
   const [isloading, setIsloading] = useState(false);
-  const [file] = useState(null);
-  const [title] = useState("");
-  const [topicName] = useState("");
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState("");
+  const [topicName, setTopicName] = useState("");
 
   const [post, setPost] = React.useState({
     author: {},
-  }); //[post, setPost] = React.useState({}); // 這裡的post是一個物件，所以要用{}，不是[]
+  });
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .get()
-      .then((docSnapshot) => {
-        const data = docSnapshot.data();
-        setPost(data);
-      });
-  }, [postId]);
+    if (versionId) {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("versions")
+        .doc(versionId)
+        .get()
+        .then((docSnapshot) => {
+          const data = docSnapshot.data();
+          setPost(data);
+        });
+    } else {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .get()
+        .then((docSnapshot) => {
+          const data = docSnapshot.data();
+          setPost(data);
+        });
+    }
+  }, [postId, versionId]);
 
   React.useEffect(() => {
     setContent(post.content);
   }, [post.content]);
+
+  React.useEffect(() => {
+    setTitle(post.title);
+  }, [post.title]);
+
+  React.useEffect(() => {
+    setTopicName(post.topic);
+  }, [post.topic]);
 
   function onSubmit() {
     setIsloading(true);

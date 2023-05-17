@@ -26,6 +26,7 @@ function App() {
         <Route path="post/:postId" element={<Postpages />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/post/:postId/modify" element={<Modify />}></Route>
+        <Route path="/post/:postId/modify/:versionId" element={<Modify />}></Route>
         <Route path="/view" element={<View />}></Route>
         {/* eslint-disable-next-line */}
         <Route path="/:topicname" element={<Dif_topic/>}></Route>
