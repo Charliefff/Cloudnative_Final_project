@@ -1,5 +1,4 @@
-import { Container, Grid, Item, MenuItem} from "semantic-ui-react";
-import {Tab} from "react-tabs";
+import { Container, Grid, Tab, Item, MenuItem} from "semantic-ui-react";
 import Topics from "../compoments/Topic";
 import firebase from "../utils/firebase";
 import React from "react";

@@ -21,9 +21,17 @@ function Header() {
 
   return (
     <Menu style={{ backgroundColor: "black", color: "white" }}>
-      <Menu.Item as={Link} to="/" style={{ color: "white" }}>
-        Document
-      </Menu.Item>
+      <Menu.Menu position="left">
+        {user ? ( // 如果有登入的話
+          <Menu.Item as={Link} to="/allpost" style={{ color: "white" }}>
+            Document
+          </Menu.Item>
+        ) : (
+          <Menu.Item as={Link} to="/" style={{ color: "white" }}>
+            Document
+          </Menu.Item>
+        )}
+      </Menu.Menu>
 
       <Menu.Item>
         <Search />
@@ -65,6 +73,8 @@ function Header() {
                 <Dropdown.Item
                   onClick={() => firebase.auth().signOut()}
                   style={{ color: "white" }}
+                  as={Link}
+                  to="/"
                 >
                   Logout
                 </Dropdown.Item>
@@ -76,7 +86,7 @@ function Header() {
             </Dropdown>
           </>
         ) : (
-          <Menu.Item as={Link} to="/signin" style={{ color: "white" }}>
+          <Menu.Item as={Link} to="/" style={{ color: "white" }}>
             Sign in
           </Menu.Item>
         )}

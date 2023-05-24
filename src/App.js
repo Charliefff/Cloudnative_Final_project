@@ -18,18 +18,21 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Post />}></Route>
-        <Route path="/signin" element={<Signin />}></Route>
+        <Route path="/" element={<Signin />}></Route>
+        <Route path="/allpost" element={<Post />}></Route>
         {/* eslint-disable-next-line */}
         <Route path="/newPost" element={<New_Post />}></Route>
 
         <Route path="post/:postId" element={<Postpages />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/post/:postId/modify" element={<Modify />}></Route>
-        <Route path="/post/:postId/modify/:versionId" element={<Modify />}></Route>
+        <Route
+          path="/post/:postId/modify/:versionId"
+          element={<Modify />}
+        ></Route>
         <Route path="/view" element={<View />}></Route>
         {/* eslint-disable-next-line */}
-        <Route path="/:topicname" element={<Dif_topic/>}></Route>
+        <Route path="/:topicname" element={<Dif_topic />}></Route>
       </Routes>
     </BrowserRouter>
   );

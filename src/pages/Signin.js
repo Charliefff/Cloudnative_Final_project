@@ -46,7 +46,7 @@ function Signin() {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          Navigate("/");
+          Navigate("/allpost");
           setIsloading(false);
         })
         .catch((error) => {
