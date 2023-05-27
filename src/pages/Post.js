@@ -1,34 +1,43 @@
 import { Container, Grid, Item, Image, Icon } from "semantic-ui-react";
 import React from "react";
-// import Header from "semantic-ui-react";
 import Topics from "../compoments/Topic";
-import firebase from "../utils/firebase";
+// import firebase from "../utils/firebase";
 import { Link } from "react-router-dom";
 
 function Post() {
   const [posts, setPosts] = React.useState([]);
+  // React.useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .get()
+  //     .then((collectionSnapshot) => {
+  //       const data = collectionSnapshot.docs.map((docSnapshot) => {
+  //         const id = docSnapshot.id;
+  //         return { ...docSnapshot.data(), id };
+  //       });
+  //       setPosts(data);
+  //     });
+  // }, []);
+
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((docSnapshot) => {
-          const id = docSnapshot.id;
-          return { ...docSnapshot.data(), id };
-        });
-        setPosts(data);
-      });
+
+    // 讀取所有文章
   }, []);
 
+  // function incrementViewCount(postId) {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .doc(postId)
+  //     .update({
+  //       viewCount: firebase.firestore.FieldValue.increment(1),
+  //     });
+  // }
+
   function incrementViewCount(postId) {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .update({
-        viewCount: firebase.firestore.FieldValue.increment(1),
-      });
+
+      // 根據postId 跟點入的文章id數量來計算瀏覽人數
   }
 
   return (

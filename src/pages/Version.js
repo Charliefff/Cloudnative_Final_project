@@ -1,8 +1,8 @@
 import { Image, Header, Segment, Button } from "semantic-ui-react";
-import firebase from "../utils/firebase";
+// import firebase from "../utils/firebase";
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import "firebase/firestore";
+// import "firebase/firestore";
 import { version } from "react/cjs/react.production.min";
 
 function Version({ versionId }) {
@@ -10,58 +10,70 @@ function Version({ versionId }) {
   const [post, setPost] = React.useState({
     author: {},
   });
+  // React.useEffect(() => {
+  //   if (versionId) {
+  //     firebase
+  //       .firestore()
+  //       .collection("posts")
+  //       .doc(postId)
+  //       .collection("versions")
+  //       .doc(versionId)
+  //       .get()
+  //       .then((docSnapshot) => {
+  //         const data = docSnapshot.data();
+  //         setPost({
+  //           title: data.title,
+  //           content: data.content,
+  //           imageUrl: data.imageUrl,
+  //           author: data.author,
+  //           viewCount: data.viewCount || 0,
+  //           updateCount: data.updateCount || 0,
+  //           cretedAt: data.cretedAt || new Date(), // 使用默認值
+  //         });
+  //       });
+  //   } else {
+  //     firebase
+  //       .firestore()
+  //       .collection("posts")
+  //       .doc(postId)
+  //       .get()
+  //       .then((docSnapshot) => {
+  //         const data = docSnapshot.data();
+  //         setPost({
+  //           title: data.title,
+  //           content: data.content,
+  //           imageUrl: data.imageUrl,
+  //           author: data.author,
+  //           viewCount: data.viewCount || 0,
+  //           updateCount: data.updateCount || 0,
+  //           cretedAt: data.cretedAt || new Date(), // 使用默認值
+  //         });
+  //       });
+  //   }
+  // }, [postId]);
+
+
   React.useEffect(() => {
-    if (versionId) {
-      firebase
-        .firestore()
-        .collection("posts")
-        .doc(postId)
-        .collection("versions")
-        .doc(versionId)
-        .get()
-        .then((docSnapshot) => {
-          const data = docSnapshot.data();
-          setPost({
-            title: data.title,
-            content: data.content,
-            imageUrl: data.imageUrl,
-            author: data.author,
-            viewCount: data.viewCount || 0,
-            updateCount: data.updateCount || 0,
-            cretedAt: data.cretedAt || new Date(), // 使用默認值
-          });
-        });
-    } else {
-      firebase
-        .firestore()
-        .collection("posts")
-        .doc(postId)
-        .get()
-        .then((docSnapshot) => {
-          const data = docSnapshot.data();
-          setPost({
-            title: data.title,
-            content: data.content,
-            imageUrl: data.imageUrl,
-            author: data.author,
-            viewCount: data.viewCount || 0,
-            updateCount: data.updateCount || 0,
-            cretedAt: data.cretedAt || new Date(), // 使用默認值
-          });
-        });
-    }
+  // if有versionId，就去拿不同版本資料
+  // else就去拿原始資料
   }, [postId]);
 
+
+  // function onDelete(id) {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .doc(id)
+  //     .delete()
+  //     .then(() => {
+  //       alert("刪除成功");
+  //     });
+  // }
+
   function onDelete(id) {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(id)
-      .delete()
-      .then(() => {
-        alert("刪除成功");
-      });
+    // 根據id來刪除文章
   }
+
   return (
     <>
       <div

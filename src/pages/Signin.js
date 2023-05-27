@@ -3,7 +3,6 @@ import React from "react";
 import firebase from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import "firebase/compat/auth";
-// import "firebase/compat/app";
 
 function Signin() {
   const Navigate = useNavigate();
@@ -13,61 +12,69 @@ function Signin() {
   const [errorMessages, setErrorMessages] = React.useState("");
   const [isloading, setIsloading] = React.useState(false);
 
+  // function onSubmit() {
+  //   setIsloading(true);
+  //   if (activeItem === "Register") {
+  //     firebase
+  //       .auth()
+  //       .createUserWithEmailAndPassword(email, password)
+  //       .then(() => {
+  //         Navigate("/");
+  //         setIsloading(false);
+  //       })
+  //       .catch((error) => {
+  //         switch (error.code) {
+  //           case "auth/email-already-in-use":
+  //             setErrorMessages("Email already in use");
+  //             break;
+  //           case "auth/invalid-email":
+  //             setErrorMessages("Invalid email");
+  //             break;
+  //           case "auth/week-password":
+  //             setErrorMessages("Week password");
+  //             break;
+  //           // case "auth/email-already-in-use":
+  //           //   setErrorMessages("Email already in use");
+  //           //   break;
+  //           default:
+  //         }
+  //         setIsloading(false);
+  //       });
+  //   } else if (activeItem === "Signin") {
+  //     firebase
+  //       .auth()
+  //       .signInWithEmailAndPassword(email, password)
+  //       .then(() => {
+  //         Navigate("/allpost");
+  //         setIsloading(false);
+  //       })
+  //       .catch((error) => {
+  //         switch (error.code) {
+  //           case "auth/invalid-email":
+  //             setErrorMessages("invalid email");
+  //             break;
+  //           case "auth/user-not-found":
+  //             setErrorMessages("User not found");
+  //             break;
+  //           case "auth/wrong-password":
+  //             setErrorMessages("wrong password");
+  //             break;
+  //           // case "auth/email-already-in-use":
+  //           //   setErrorMessages("Email already in use");
+  //           //   break;
+  //           default:
+  //         }
+  //         setIsloading(false);
+  //       });
+  //   }
+  // }
+
   function onSubmit() {
-    setIsloading(true);
-    if (activeItem === "Register") {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          Navigate("/");
-          setIsloading(false);
-        })
-        .catch((error) => {
-          switch (error.code) {
-            case "auth/email-already-in-use":
-              setErrorMessages("Email already in use");
-              break;
-            case "auth/invalid-email":
-              setErrorMessages("Invalid email");
-              break;
-            case "auth/week-password":
-              setErrorMessages("Week password");
-              break;
-            // case "auth/email-already-in-use":
-            //   setErrorMessages("Email already in use");
-            //   break;
-            default:
-          }
-          setIsloading(false);
-        });
-    } else if (activeItem === "Signin") {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => {
-          Navigate("/allpost");
-          setIsloading(false);
-        })
-        .catch((error) => {
-          switch (error.code) {
-            case "auth/invalid-email":
-              setErrorMessages("invalid email");
-              break;
-            case "auth/user-not-found":
-              setErrorMessages("User not found");
-              break;
-            case "auth/wrong-password":
-              setErrorMessages("wrong password");
-              break;
-            // case "auth/email-already-in-use":
-            //   setErrorMessages("Email already in use");
-            //   break;
-            default:
-          }
-          setIsloading(false);
-        });
-    }
+
+    //if (activeItem === "Register") 存入資料庫並且登入導入首頁
+    // 提示使用者的錯誤訊息
+    // else if (activeItem === "Signin") 登入導入首頁
+    // 提示使用者的錯誤訊息
   }
 
   return (

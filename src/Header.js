@@ -6,17 +6,22 @@ import firebase from "./utils/firebase";
 
 function Header() {
   const [user, setUser] = React.useState(null);
+  // React.useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((currentUser) => {
+  //     setUser(currentUser);
+  //   });
+  // }, []);
+  
   React.useEffect(() => {
-    firebase.auth().onAuthStateChanged((currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
+    // 抓取使用者資料
+
+  }, [user]);
 
   const getUsername = () => {
     if (user && user.displayName) {
       return user.displayName;
     }
-    return "還沒有名字";
+    return "匿名";
   };
 
   return (
@@ -62,12 +67,6 @@ function Header() {
             <Menu.Item as={Link} to="/view" style={{ color: "white" }}>
               View
             </Menu.Item>
-            {/* <Menu.Item
-              onClick={() => firebase.auth().signOut()}
-              style={{ color: "white" }}
-            >
-              Logout
-            </Menu.Item> */}
             <Dropdown item text={getUsername()} style={{ color: "white" }}>
               <Dropdown.Menu>
                 <Dropdown.Item

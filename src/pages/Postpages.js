@@ -3,7 +3,7 @@ import Topics from "../compoments/Topic";
 import firebase from "../utils/firebase";
 import React from "react";
 import { useParams } from "react-router-dom";
-import "firebase/firestore";
+// import "firebase/firestore";
 import Version from "./Version";
 
 function Postpages() {
@@ -11,23 +11,29 @@ function Postpages() {
   const { postId } = useParams();
 
   const [posts, setPosts] = React.useState([]);
+  // React.useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .doc(postId)
+  //     .collection("versions")
+  //     .get()
+  //     .then((collectionSnapshot) => {
+  //       const ids = [];
+  //       const data = collectionSnapshot.docs.map((docSnapshot) => {
+  //         const id = docSnapshot.id;
+  //         ids.push(id);
+  //         return { ...docSnapshot.data(), id };
+  //       });
+  //       setPostIds(ids);
+  //       setPosts(data);
+  //     });
+  // }, []);
+
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .collection("versions")
-      .get()
-      .then((collectionSnapshot) => {
-        const ids = [];
-        const data = collectionSnapshot.docs.map((docSnapshot) => {
-          const id = docSnapshot.id;
-          ids.push(id);
-          return { ...docSnapshot.data(), id };
-        });
-        setPostIds(ids);
-        setPosts(data);
-      });
+
+    // 根據postid抓取所又不同version的文章將其id存入postId導入Version.js
+    // 從下面panes傳入
   }, []);
 
   const panes = [
@@ -39,13 +45,20 @@ function Postpages() {
         </Tab.Pane>
       ),
     },
-    ...posts.map((post) => ({
-      menuItem: post.cretedAt.toDate().toLocaleString([], {
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+    // ...posts.map((post) => ({
+    //   menuItem: post.cretedAt.toDate().toLocaleString([], {
+    //     month: "short",
+    //     day: "numeric",
+    //     hour: "2-digit",
+    //     minute: "2-digit",
+    //   }),
+    
+    //顯示更改時間
+  ...posts.map((post) => ({
+      menuItem: post.cretedAt
+  })),
+
+
       render: () => (
         <Tab.Pane key={post.id}>
           <Version versionId={post.id} />

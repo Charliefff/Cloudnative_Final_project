@@ -1,6 +1,6 @@
 import React from "react";
-import firebase from "../utils/firebase";
-import "firebase/compat/firestore";
+// import firebase from "../utils/firebase";
+// import "firebase/compat/firestore";
 import { List } from "semantic-ui-react";
 import { Link, useLocation } from "react-router-dom";
 function Topics() {
@@ -9,18 +9,23 @@ function Topics() {
   const parts = pathname.split('/'); // [ "", "topic", "%E8%96%AA%E6%B0%B4" ]
   const currentTopic = decodeURIComponent(parts[1]); // "薪水"  
   const [topics, setTopics] = React.useState([]);
+  // React.useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("topics")
+  //     .get()
+  //     .then((collectionSnapshot) => {
+  //       const data = collectionSnapshot.docs.map((doc) => {
+  //         return doc.data();
+  //       });
+  //       // console.log(data);
+  //       setTopics(data);
+  //     });
+  // }, [currentTopic]);
+
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("topics")
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((doc) => {
-          return doc.data();
-        });
-        // console.log(data);
-        setTopics(data);
-      });
+// 抓取不同的collection
+
   }, [currentTopic]);
 
   return (

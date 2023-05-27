@@ -9,43 +9,46 @@ function Dif_topic() {
   const pathname = location.pathname;
   const parts = pathname.split("/");
   const currentTopic = decodeURIComponent(parts[1]);
+
   const [posts, setPosts] = React.useState([]);
+  // React.useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .where("topic", "==", currentTopic)
+  //     .get()
+  //     .then((collectionSnapshot) => {
+  //       const data = collectionSnapshot.docs.map((docSnapshot) => {
+  //         const id = docSnapshot.id;
+  //         return { ...docSnapshot.data(), id };
+  //       });
+  //       setPosts(data);
+  //     });
+  // }, [currentTopic]);
+
+
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .where("topic", "==", currentTopic)
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((docSnapshot) => {
-          const id = docSnapshot.id;
-          return { ...docSnapshot.data(), id };
-        });
-        setPosts(data);
-      });
+
+    // 根據 currentTopic 來決定要讀取哪個 collection
+
   }, [currentTopic]);
-  // eslint-disable-next-line
-  // function updateViewUser(postId) {
+
+  // function incrementViewCount(postId) {
   //   firebase
   //     .firestore()
   //     .collection("posts")
   //     .doc(postId)
+
   //     .update({
-  //       viewUser: firebase.firestore.FieldValue.arrayUnion(
-  //         firebase.auth().currentUser.uid
-  //       ),
+  //       viewCount: firebase.firestore.FieldValue.increment(1),
   //     });
   // }
-  function incrementViewCount(postId) {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
 
-      .update({
-        viewCount: firebase.firestore.FieldValue.increment(1),
-      });
-  }
+  
+  function incrementViewCount(postId) {
+
+    // 根據postId 跟點入的文章id數量來計算瀏覽人數
+  };
 
   return (
     <Container>

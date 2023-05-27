@@ -15,18 +15,22 @@ function New_Post() {
   const [file, setFile] = useState(null);
   const [isloading, setIsloading] = useState(false);
 
+  // React.useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("topics")
+  //     .get()
+  //     .then((collectionSnapshot) => {
+  //       const data = collectionSnapshot.docs.map((doc) => {
+  //         return doc.data();
+  //       });
+  //       // console.log(data);
+  //       setTopics(data);
+  //     });
+  // }, []);
+  
   React.useEffect(() => {
-    firebase
-      .firestore()
-      .collection("topics")
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((doc) => {
-          return doc.data();
-        });
-        // console.log(data);
-        setTopics(data);
-      });
+    // 根據topicName抓取不同的collection
   }, []);
 
   const options = topics.map((topic) => {
@@ -35,51 +39,52 @@ function New_Post() {
       value: topic.name,
     };
   });
-  // eslint-disable-next-line
-  // const preview = file
-  //   ? URL.createObjectURL(file)
-  //   : "https://react.semantic-ui.com/images/wireframe/image.png";
+
+  // function onSubmit() {
+  //   setIsloading(true);
+  //   const documentRef = firebase
+  //     .firestore()
+  //     .collection("posts")
+  //     .doc();
+  //   const fileRef = firebase.storage().ref("post/" + documentRef.id);
+  //   let metadata = {};
+  //   if (file !== null) {
+  //     metadata = {
+  //       contentType: file.type,
+  //     };
+  //   }
+
+  //   fileRef.put(file, metadata).then(() => {
+  //     fileRef.getDownloadURL().then((imageUrl) => {
+  //       documentRef
+  //         .set({
+  //           topic: topicName,
+  //           content,
+  //           title,
+  //           cretedAt: firebase.firestore.Timestamp.now(),
+  //           author: {
+  //             display: firebase.auth().currentUser.displayName || "Unknown",
+  //             photoURL:
+  //               firebase.auth().currentUser.photoURL ||
+  //               "https://react.semantic-ui.com/images/avatar/large/molly.png",
+  //             uid: firebase.auth().currentUser.uid,
+  //             email: firebase.auth().currentUser.email,
+  //           },
+  //           imageUrl,
+  //         })
+  //         .then(() => {
+  //           setIsloading(false);
+  //           navigate("/");
+  //         });
+  //     });
+  //   });
+  // }
 
   function onSubmit() {
-    setIsloading(true);
-    const documentRef = firebase
-      .firestore()
-      .collection("posts")
-      .doc();
-    const fileRef = firebase.storage().ref("post/" + documentRef.id);
-    // 可能有bug
-    let metadata = {};
-    if (file !== null) {
-      metadata = {
-        contentType: file.type,
-      };
-    }
 
-    fileRef.put(file, metadata).then(() => {
-      fileRef.getDownloadURL().then((imageUrl) => {
-        documentRef
-          .set({
-            topic: topicName,
-            content,
-            title,
-            cretedAt: firebase.firestore.Timestamp.now(),
-            author: {
-              display: firebase.auth().currentUser.displayName || "Unknown",
-              photoURL:
-                firebase.auth().currentUser.photoURL ||
-                "https://react.semantic-ui.com/images/avatar/large/molly.png",
-              uid: firebase.auth().currentUser.uid,
-              email: firebase.auth().currentUser.email,
-            },
-            imageUrl,
-          })
-          .then(() => {
-            setIsloading(false);
-            navigate("/");
-          });
-      });
-    });
+    // 存入posts collection
   }
+
 
   return (
     <Container>

@@ -1,6 +1,6 @@
 import { Grid, Image, Button, Segment } from "semantic-ui-react";
 import React from "react";
-
+// 這邊完成了這兩天會在併上去
 function Home() {
   return (
     <Grid celled="internally">
