@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../context/auth/AuthState';
-import { Container, Table, Grid } from 'semantic-ui-react';
-import axios from 'axios';
-import Spinner from '../layout/Spinner';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth/AuthState";
+import { Container, Table, Grid } from "semantic-ui-react";
+import axios from "axios";
+import Spinner from "../layout/Spinner";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [state] = useAuth();
@@ -15,7 +15,7 @@ const UserProfile = () => {
   useEffect(() => {
     const getUserHistory = async () => {
       try {
-        const res = await axios.get('/api/histories');
+        const res = await axios.get("/api/histories");
         setHistories(res.data);
       } catch (error) {
         console.error(error);
@@ -34,12 +34,16 @@ const UserProfile = () => {
       <Container>
         <Grid>
           <Grid.Column width={3}>
-              <h1>User Profile</h1>
-              <p>{name}</p>
-              <p>{department}</p>
+            <h2>User Profile</h2>
+
+            <p style={{ fontSize: "17px" }}>
+              {/* <Icon name="user circle" size="small" /> */}
+              {name}
+            </p>
+            <p style={{ fontSize: "17px" }}>{department}</p>
           </Grid.Column>
           <Grid.Column width={13}>
-            <Table celled >
+            <Table celled>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Title</Table.HeaderCell>
@@ -49,17 +53,31 @@ const UserProfile = () => {
               </Table.Header>
 
               <Table.Body>
-                {histories.map(history => (
-                  <Table.Row key={history._id}>
+                {histories.map((history) => (
+                  <Table.Row
+                    key={history._id}
+                    style={{
+                      backgroundColor:
+                        history.operation === "Delete"
+                          ? "rgba(255, 0, 0, 0.1)"
+                          : "",
+                    }}
+                  >
                     <Table.Cell>
                       <Link to={`/history/${history._id}`}>
                         {history.title}
                       </Link>
                     </Table.Cell>
-                    <Table.Cell >
+                    <Table.Cell>
                       {new Date(history.date).toLocaleString()}
-                    </Table.Cell >
-                    <Table.Cell>{history.operation}</Table.Cell>
+                    </Table.Cell>
+                    <Table.Cell
+                      style={{
+                        color: history.operation === "Delete" ? "red" : "",
+                      }}
+                    >
+                      {history.operation}
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
