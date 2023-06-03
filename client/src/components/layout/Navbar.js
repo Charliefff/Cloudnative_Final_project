@@ -1,4 +1,4 @@
-import { Menu, Search, Dropdown } from "semantic-ui-react";
+import { Menu, Search, Dropdown, Image } from "semantic-ui-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth, logout } from "../../context/auth/AuthState";
@@ -34,6 +34,9 @@ const Navbar = ({ title, icon }) => {
           color: "white",
         }}
       ></Menu.Item>
+      {/* <Menu.Item className="navbar-center">
+        <Image src="./tsmc.png"></Image>
+      </Menu.Item> */}
 
       <Menu.Menu position="right">
         {isAuthenticated ? (
