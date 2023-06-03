@@ -7,3 +7,5 @@
     First, you should have docker desktop and docker, and it will be simple.
     Run 'docker-compose up' will install all the packages and run the servers in containers.
     Run 'docker-compose up --build' if you changes the files, you will need to rebuild it.
+
+3. TEST
