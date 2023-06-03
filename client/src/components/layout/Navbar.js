@@ -34,9 +34,6 @@ const Navbar = ({ title, icon }) => {
           color: "white",
         }}
       ></Menu.Item>
-      {/* <Menu.Item className="navbar-center">
-        <Image src="./tsmc.png"></Image>
-      </Menu.Item> */}
 
       <Menu.Menu position="right">
         {isAuthenticated ? (

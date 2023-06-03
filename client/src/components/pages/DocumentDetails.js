@@ -10,6 +10,7 @@ import {
   ItemContent,
   ItemMeta,
   ItemHeader,
+  Divider,
 } from "semantic-ui-react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -121,6 +122,7 @@ const DocumentDetail = () => {
                           minute: "2-digit",
                         })}
                       </ItemMeta>
+                      <Divider />
                     </ItemContent>
                   </Item>
                 );
