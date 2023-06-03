@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background-color: #f8f9fa;
+    border-radius: 30px;
+    margin-top: 5vh !important;
+}
+  
+.header{
+    margin-top: 0vh !important;
+}
+
+.form {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
+}
+  
+.form-input {
+    border: none;
+    margin-bottom: 1em;
+    padding: 10px;
+    position: relative;
+}

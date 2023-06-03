@@ -8,6 +8,7 @@ import {
   login,
   loadUser,
 } from '../../context/auth/AuthState';
+import './login.css';
 
 const Login = () => {
   const alertContext = useContext(AlertContext);
@@ -29,6 +30,8 @@ const Login = () => {
     password: '',
   });
 
+  const [isFocused, setIsFocused] = useState(false);
+
   const { email, password } = user;
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
@@ -47,14 +50,14 @@ const Login = () => {
   if (isAuthenticated) return <Navigate to='/' />;
 
   return (
-    <Container>
+    <Container className="container">
       <div>
-        <Header as='h2' icon textAlign='center'>
+        <Header as='h2' icon textAlign='center' className="header" margin-top='100px'>
           <Icon name='users' circular />
-          <Header.Content>Signin</Header.Content>
+          <Header.Content>Sign in</Header.Content>
         </Header>
       </div>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} className="form">
         <Form.Input
           label='Email'
           id='email'
@@ -64,6 +67,14 @@ const Login = () => {
           placeholder='Email'
           type='email'
           required
+          className="form-input"
+          style={{
+            border: 'none',
+            borderBottom: email ? '3px solid' : 'none',
+            borderImage: email ? 'linear-gradient(to right, #6065D9, #17D7FA) 1' : '',
+            position: 'relative',
+            margin: '10px 0',
+          }}
         />
         <Form.Input
           label='Password'
@@ -74,9 +85,35 @@ const Login = () => {
           onChange={onChange}
           type='password'
           required
+          className="form-input"
+          style={{
+            border: 'none',
+            borderBottom: password ? '3px solid' : 'none',
+            borderImage: password ? 'linear-gradient(to right, #6065D9, #17D7FA) 1' : '',
+            position: 'relative',
+            margin: '10px 0',
+          }}
         />
-        <Form.Button type='submit' value='Login'>
-          Sign in
+        <Form.Button type='submit' value='Login' className="form-button"
+        style={{ 
+          background: 'linear-gradient(to right, #6065D9, #17D7FA)', 
+          color: '#fff', 
+          border: 'none', 
+          borderRadius: '10px', 
+          fontSize: '15px', 
+          fontWeight: '300', 
+          display: 'block', 
+          // width: '100px', 
+          // height: '40px', 
+          margin: '0 auto', 
+          cursor: 'pointer',
+          transition: 'background 1s ease',
+          // outline: 'none'
+        }}
+        onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(to right, #17D7FA, #6065D9)'}
+        onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(to right, #6065D9, #17D7FA)'}
+        >
+          Sign in <span class="fas fa-arrow-right"></span>
         </Form.Button>
       </Form>
     </Container>
