@@ -34,12 +34,12 @@ const UserProfile = () => {
       <Container>
         <Grid>
           <Grid.Column width={3}>
-            <h1>User Profile</h1>
-            <p>{name}</p>
-            <p>{department}</p>
+              <h1>User Profile</h1>
+              <p>{name}</p>
+              <p>{department}</p>
           </Grid.Column>
           <Grid.Column width={13}>
-            <Table celled>
+            <Table celled >
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Title</Table.HeaderCell>
@@ -56,9 +56,9 @@ const UserProfile = () => {
                         {history.title}
                       </Link>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell >
                       {new Date(history.date).toLocaleString()}
-                    </Table.Cell>
+                    </Table.Cell >
                     <Table.Cell>{history.operation}</Table.Cell>
                   </Table.Row>
                 ))}

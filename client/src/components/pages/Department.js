@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Grid, Item, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import Spinner from '../layout/Spinner';
-import Topics from '../layout/Topic';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Container, Grid, Item, Icon, Card } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import Spinner from "../layout/Spinner";
+import Topics from "../layout/Topic";
+import axios from "axios";
 
 const Department = () => {
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     axios
-      .get('/api/department')
-      .then(res => {
+      .get("/api/department")
+      .then((res) => {
         setDocuments(res.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }, []);
@@ -25,12 +25,12 @@ const Department = () => {
     <Container>
       <Grid>
         <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column width={3}>
             <Topics />
           </Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column width={13}>
             <Item.Group>
-              {documents.map(document => {
+              {documents.map((document) => {
                 return (
                   <Item
                     key={document._id}
@@ -40,31 +40,52 @@ const Department = () => {
                     {/* <Image src={post.imageUrl} size='tiny' /> */}
 
                     <Item.Content>
-                      <Item.Meta>
-                        <Icon name='user circle' size='small' />
-                        {/* {post.author.photoURL ? (
-                          <Image src={post.author.photoURL} width={25} />
-                        ) : (
-                          <Icon name='user circle' size='small' />
-                        )} */}
-                        {document.department} • {document.userName || '匿名'} •{' '}
-                        {new Date(document.date).toLocaleString([], {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </Item.Meta>
+                      <Card
+                        style={{
+                          width: "650px",
+                          height: "120px",
+                          border: "1px solid #D3D3D3",
+                          // borderBottom: "1px solid #000",
+                        }}
+                      >
+                        <Card.Content>
+                          <Card.Header
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <div>
+                              <h1>{document.title}</h1>{" "}
+                            </div>
+                            <div>
+                              <h6>
+                                {new Date(document.date).toLocaleString([], {
+                                  year: "numeric",
+                                  month: "short",
+                                  day: "numeric",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </h6>
+                            </div>
+                          </Card.Header>
+                          <Card.Meta>
+                            <h5 style={{ color: "#919191" }}>
+                              <Icon name="user circle" size="small" />
+                              {document.userName || "匿名"} •
+                              {document.department}
+                            </h5>
+                          </Card.Meta>
 
-                      <Item.Header>{document.title}</Item.Header>
-                      <Item.Extra>
-                        {/* <a href={`/posts/${post.id}/edit`}> */}
-                        {/* 修改次數 : {post.updateCount || 0} */}
-                        {/* </a>{" "} */} {/* <a href={`/posts/${post.id}`}> */}
-                        {/* 觀看次數 : {post.viewCount || 0} */}
-                        {/* </a> */}
-                      </Item.Extra>
+                          <Card.Meta style={{ color: "#000000" }}>
+                            {" "}
+                            {document.content.length > 80
+                              ? `${document.content.substring(0, 80)}...`
+                              : document.content}
+                          </Card.Meta>
+                        </Card.Content>
+                      </Card>
                     </Item.Content>
                   </Item>
                 );

@@ -1,0 +1,7 @@
+.topic-list {
+  font-family: "Noto Sans TC";
+  color: #000000;
+}
+.topic-list .active {
+  font-weight: bold;
+}
