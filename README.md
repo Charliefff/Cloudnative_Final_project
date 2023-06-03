@@ -8,4 +8,4 @@
     Run 'docker-compose up' will install all the packages and run the servers in containers.
     Run 'docker-compose up --build' if you changes the files, you will need to rebuild it.
 
-3. TEST
+3. TEST 
