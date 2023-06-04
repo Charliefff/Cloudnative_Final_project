@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Header,
   Segment,
@@ -10,12 +10,13 @@ import {
   ItemContent,
   ItemMeta,
   ItemHeader,
-} from 'semantic-ui-react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from '../../context/auth/AuthState';
-import Spinner from '../layout/Spinner';
-import Topics from '../layout/Topic';
+  Divider,
+} from "semantic-ui-react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../context/auth/AuthState";
+import Spinner from "../layout/Spinner";
+import Topics from "../layout/Topic";
 
 const DocumentDetail = () => {
   const { id } = useParams();
@@ -66,16 +67,16 @@ const DocumentDetail = () => {
       .delete(`/api/documents/${id}`)
       .then(() => {
         // Add history record
-        axios.post('/api/histories', {
+        axios.post("/api/histories", {
           documentId: id,
           title: document.title,
           content: document.content,
-          operation: 'Delete',
+          operation: "Delete",
         });
 
-        navigate('/', { replace: true });
+        navigate("/", { replace: true });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -101,8 +102,8 @@ const DocumentDetail = () => {
           <Grid.Column width={5}>
             {isAuthenticated ? <Topics /> : null}
             <ItemGroup>
-              <Header as='h3'>歷史紀錄</Header>
-              {histories.map(history => {
+              <Header as="h3">歷史紀錄</Header>
+              {histories.map((history) => {
                 return (
                   <Item
                     key={history._id}
@@ -114,13 +115,14 @@ const DocumentDetail = () => {
                       <ItemMeta>Operation: {history.operation}</ItemMeta>
                       <ItemMeta>
                         {new Date(history.date).toLocaleString([], {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
                         })}
                       </ItemMeta>
+                      <Divider />
                     </ItemContent>
                   </Item>
                 );
@@ -131,35 +133,35 @@ const DocumentDetail = () => {
             <>
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '1rem',
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "1rem",
                 }}
               >
                 <div>
                   <h5>使用者 / 時間 :</h5>
-                  {document.userName || '匿名 / '}
-                  {'  /  '}
+                  {document.userName || "匿名 / "}
+                  {"  /  "}
                   {new Date(document.date).toLocaleString([], {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
                   })}
                 </div>
               </div>
-              <Header as='h1'>{document.title}</Header>
+              <Header as="h1">{document.title}</Header>
               <Segment basic vertical>
                 {document.content}
               </Segment>
               <div>
                 {isAuthenticated && isOwner() ? (
                   <>
-                    <Button basic onClick={handleEdit}>
+                    <Button color="gray" onClick={handleEdit}>
                       更改文章
                     </Button>
-                    <Button color='red' onClick={handleDelete}>
+                    <Button color="red" onClick={handleDelete}>
                       刪除文章
                     </Button>
                   </>
