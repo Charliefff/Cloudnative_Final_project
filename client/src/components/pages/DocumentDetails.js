@@ -10,6 +10,7 @@ import {
   ItemContent,
   ItemMeta,
   ItemHeader,
+  Icon,
   Divider,
 } from "semantic-ui-react";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -102,7 +103,9 @@ const DocumentDetail = () => {
           <Grid.Column width={5}>
             {isAuthenticated ? <Topics /> : null}
             <ItemGroup>
-              <Header as="h3">歷史紀錄</Header>
+              <Header>
+                <h2>歷史紀錄</h2>
+              </Header>
               {histories.map((history) => {
                 return (
                   <Item
@@ -111,7 +114,12 @@ const DocumentDetail = () => {
                     to={`/history/${history._id}`}
                   >
                     <ItemContent>
-                      <ItemHeader>{history.userName}</ItemHeader>
+                      <ItemMeta style={{ color: "#000000" }}>
+                        <h3>
+                          <Icon name="user circle" />
+                          {""} {history.userName}
+                        </h3>
+                      </ItemMeta>
                       <ItemMeta>Operation: {history.operation}</ItemMeta>
                       <ItemMeta>
                         {new Date(history.date).toLocaleString([], {
@@ -122,7 +130,7 @@ const DocumentDetail = () => {
                           minute: "2-digit",
                         })}
                       </ItemMeta>
-                      <Divider />
+                      <Divider style={{ marginBottom: 1 }} />
                     </ItemContent>
                   </Item>
                 );
