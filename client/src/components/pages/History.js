@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Segment, Divider, Icon, Button } from "semantic-ui-react";
 import Spinner from "../layout/Spinner";
 import axios from "axios";
+import "./history.css";
 
 const History = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const History = () => {
 
   return (
     <div>
-      <Segment>
+      <Segment className="segment">
         <h2>{history.title}</h2>
         <p>
           <strong>{history.userName}</strong> • {history.date}
@@ -36,7 +37,12 @@ const History = () => {
         <Divider />
         <p>{history.content}</p>
       </Segment>
-      <Button icon labelPosition="right" onClick={() => navigate(-1)}>
+      <Button
+        icon
+        labelPosition="right"
+        onClick={() => navigate(-1)}
+        className="button"
+      >
         <Icon name="arrow left" />
         Back
       </Button>

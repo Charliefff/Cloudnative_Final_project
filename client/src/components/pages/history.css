@@ -1,0 +1,14 @@
+.segment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 30px;
+    margin-top: 5vh !important;
+    margin-bottom: 3vh !important;
+}
+
+.button {
+    margin-bottom: 5vh !important;
+}
