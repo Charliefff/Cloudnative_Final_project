@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <Container className="container">
       <div>
-        <Header as='h2' icon textAlign='center' className="header" margin-top='100px'>
+        <Header as='h2' icon textAlign='center' className="header">
           <Icon name='users' circular />
           <Header.Content>Sign in</Header.Content>
         </Header>
