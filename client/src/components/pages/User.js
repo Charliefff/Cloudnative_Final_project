@@ -45,7 +45,7 @@ const User = () => {
                       <Card
                         style={{
                           width: "650px",
-                          height: "120px",
+                          height: "150px",
                           border: "1px solid #D3D3D3",
                           // borderBottom: "1px solid #000",
                         }}
