@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Segment, Divider, Icon, Button } from "semantic-ui-react";
 import Spinner from "../layout/Spinner";
 import axios from "axios";
+<<<<<<< HEAD
 import "./history.css";
+=======
+import "./History.css";
+>>>>>>> 0987113ca4d38933ed552a5ddfe85725e026af47
 
 const History = () => {
   const { id } = useParams();
