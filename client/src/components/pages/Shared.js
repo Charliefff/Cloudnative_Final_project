@@ -67,7 +67,11 @@ const Shared = () => {
                             }}
                           >
                             <div>
-                              <h1>{document.title}</h1>{" "}
+                              <<h1>
+                                {document.title.length > 20
+                                  ? `${document.title.substring(0, 20)}...`
+                                  : document.title}
+                              </h1>
                             </div>
                             <div>
                               <h6>
