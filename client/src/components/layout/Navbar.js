@@ -18,24 +18,24 @@ const Navbar = ({ title, icon }) => {
   return (
     <Menu style={{ backgroundColor: "black", color: "white" }}>
       <Menu.Menu position="left">
-        <Menu.Item as={Link} to="/">
-          <img
-            src={require("./tsmc.jpg")}
-            style={{ width: "45px", height: "35px", marginLeft: "auto" }}
-          />
-        </Menu.Item>
         <Menu.Item
           as={Link}
           to="/"
           style={{
             color: "white",
-            marginLeft: "1px",
+            display: "flex",
+            marginLeft: "5px",
+            alignItems: "center",
           }}
           name="share"
           active={activeItem === "share"}
           onClick={handleItemClick}
         >
-          <h2> TSMC Document</h2>
+          <img
+            src={require("./tsmc.jpg")}
+            style={{ width: "45px", height: "35px", marginRight: "10px" }}
+          />
+          <h2 style={{ margin: 0 }}>TSMC Document</h2>
         </Menu.Item>
       </Menu.Menu>
 
