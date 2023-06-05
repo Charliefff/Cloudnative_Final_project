@@ -67,7 +67,7 @@ const Shared = () => {
                             }}
                           >
                             <div>
-                              <<h1>
+                              <h1>
                                 {document.title.length > 20
                                   ? `${document.title.substring(0, 20)}...`
                                   : document.title}
