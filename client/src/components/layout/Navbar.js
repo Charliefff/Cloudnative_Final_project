@@ -35,7 +35,7 @@ const Navbar = ({ title, icon }) => {
             src={require("./tsmc.jpg")}
             style={{ width: "45px", height: "35px", marginRight: "10px" }}
           />
-          <h2 style={{ margin: 0 }}>TSMC Document</h2>
+          <h3 style={{ margin: 0 }}>TSMC Document</h3>
         </Menu.Item>
       </Menu.Menu>
 
