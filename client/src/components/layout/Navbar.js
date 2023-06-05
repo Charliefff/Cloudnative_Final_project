@@ -35,7 +35,7 @@ const Navbar = ({ title, icon }) => {
           active={activeItem === "share"}
           onClick={handleItemClick}
         >
-          <h2> TSMC Document</h2>
+          <h3> TSMC Document</h3>
         </Menu.Item>
       </Menu.Menu>
 
