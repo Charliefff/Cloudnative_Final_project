@@ -114,6 +114,11 @@ const DocumentDetail = () => {
                     to={`/history/${history._id}`}
                   >
                     <ItemContent>
+                      {/* <ItemHeader>
+                        <Icon name="user circle" size="large" />
+                        {"  "}
+                        {history.userName}
+                      </ItemHeader> */}
                       <ItemMeta style={{ color: "#000000" }}>
                         <h3>
                           <Icon name="user circle" />
