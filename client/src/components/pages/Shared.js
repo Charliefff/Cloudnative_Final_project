@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Item, Icon, Card } from "semantic-ui-react";
 import Topics from "../layout/Topic";
+import Visitor from "../layout/Visitor";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import axios from "axios";
@@ -37,7 +38,7 @@ const Shared = () => {
       <Grid>
         <Grid.Row>
           <Grid.Column width={3}>
-            {isAuthenticated ? <Topics /> : null}
+            {isAuthenticated ? <Topics /> : <Visitor />}
           </Grid.Column>
           <Grid.Column width={13}>
             <Item.Group>
