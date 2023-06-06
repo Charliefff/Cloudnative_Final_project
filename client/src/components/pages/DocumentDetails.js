@@ -179,7 +179,7 @@ const DocumentDetail = () => {
                     </Button>
                   </>
                 ) : isAuthenticated && isDepartment() ? (
-                  <Button basic onClick={handleEdit}>
+                  <Button color="gray" onClick={handleEdit}>
                     更改文章
                   </Button>
                 ) : null}
